@@ -1,5 +1,6 @@
 package com.gantix.JailMonkey.Rooted;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.File;
 
 public class LessThan23 implements CheckApiVersion {
@@ -12,7 +13,7 @@ public class LessThan23 implements CheckApiVersion {
     private static boolean canExecuteCommand(String command) {
         boolean executeResult;
         try {
-            Process process = Runtime.getRuntime().exec(command);
+            Process process = SystemCommand.runCommand(Runtime.getRuntime(), command);
             if(process.waitFor() == 0) {
                 executeResult = true;
             } else {
