@@ -1,5 +1,6 @@
 package com.gantix.JailMonkey.Rooted;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -33,7 +34,7 @@ public class GreaterThan23 implements CheckApiVersion {
         try {
             process = Runtime.getRuntime().exec(new String[] { "/system/xbin/which", "su" });
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            if (in.readLine() != null) return true;
+            if (BoundedLineReader.readLine(in, 5_000_000) != null) return true;
             return false;
         } catch (Throwable t) {
             return false;
